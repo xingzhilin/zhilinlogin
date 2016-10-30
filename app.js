@@ -25,8 +25,11 @@ app.use(function(req, res, next){
 		res.redirect('/login');
 	}
 });
+app.get('/', function(req, res){
+	res.redirect('/login');
+});
 app.get('/login', function(req, res){
-	res.render('login');
+	res.render('login', {title: '登录'});
 });
 app.post('/login', function(req, res){
 	var user = req.body;
@@ -41,7 +44,7 @@ app.post('/login', function(req, res){
 });
 app.get('/user', function(req, res){
 	if(req.session && req.session.username){
-		res.render('user', {username: req.session.username,password: req.session.password })
+		res.render('user', {title:'用户信息详情',username: req.session.username,password: req.session.password })
 	}else{
 		res.redirect('/login');
 	}
